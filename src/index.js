@@ -8,7 +8,7 @@ const app = express()
 console.log({
     host: process.env.MYSQLDB_HOST,
     password: process.env.MYSQLDB_PASSWORD,
-    port: process.env.MYSQLDB_PORT
+    port: process.env.MYSQLDB_DOCKER_PORT
 })
 
 const pool = createPool({
@@ -27,5 +27,5 @@ app.get('/ping', async (req, res) => {
     res.json(result[0])
 })
 
-app.listen(3000)
-console.log('Server on port', 3000)
+app.listen(process.env.NODE_DOCKER_PORT)
+console.log('Server on port', process.env.NODE_DOCKER_PORT)
