@@ -1,13 +1,21 @@
 import express from 'express'
 import { createPool } from 'mysql2/promise'
+import { config } from 'dotenv'
+config()
 
 const app = express()
 
+console.log({
+    host: process.env.MYSQLDB_HOST,
+    password: process.env.MYSQLDB_PASSWORD,
+    port: process.env.MYSQLDB_PORT
+})
+
 const pool = createPool({
-    host: 'mysqldb',
+    host: process.env.MYSQLDB_HOST,
     user: 'root',
-    password: '12345',
-    port: 3306
+    password: process.env.MYSQLDB_PASSWORD,
+    port: process.env.MYSQLDB_DOCKER_PORT
 })
 
 app.get('/', (req, res) => {
